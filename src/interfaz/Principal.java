@@ -106,31 +106,49 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(415, 250));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
       String res;
       double n1, n2, resultado=0;
-      int op;
+      int op,sw= 1;
       
       if(txtNumeroUno.getText().trim().isEmpty()){
           JOptionPane.showMessageDialog(this, "Digite el número uno", "Error", JOptionPane.ERROR_MESSAGE);
           txtNumeroUno.requestFocusInWindow();
+          sw=0;
       }else if(txtNumeroDos.getText().trim().isEmpty()){
           JOptionPane.showMessageDialog(this, "Digite el número dos", "Error", JOptionPane.ERROR_MESSAGE);
           txtNumeroDos.requestFocusInWindow();
+          sw=0;
       }else {
-      
+         try {
+           n1 = Double.parseDouble(txtNumeroUno.getText());
+         }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(this, "El primer numero debe ser un numero valido","ERROR",JOptionPane.ERROR_MESSAGE);
+             txtNumeroUno.requestFocusInWindow();
+             txtNumeroUno.selectAll();
+             sw=0;
+         }
+         try{
+         n2 = Double.parseDouble(txtNumeroDos.getText());   
+         }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(this, "El segundo numero debe ser un numero valido","EEROR",JOptionPane.ERROR_MESSAGE);
+             txtNumeroDos.requestFocusInWindow();
+             txtNumeroDos.selectAll();
+             sw= 0;
+        }
+      }
+    if(sw == 1){
      
           
       n1 = Double.parseDouble(txtNumeroUno.getText());
@@ -160,7 +178,7 @@ public class Principal extends javax.swing.JFrame {
       
       res = String.valueOf(resultado);
       txtResultado.setText(res);
-      }
+       }
       } 
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
@@ -176,19 +194,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void txtNumeroUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroUnoKeyTyped
-        char c=evt.getKeyChar(); 
-          if(!Character.isDigit(c)) { 
-              getToolkit().beep(); 
-              evt.consume(); 
-          } 
+        
     }//GEN-LAST:event_txtNumeroUnoKeyTyped
 
     private void txtNumeroDosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDosKeyTyped
-         char c=evt.getKeyChar(); 
-          if(!Character.isDigit(c)) { 
-              getToolkit().beep(); 
-              evt.consume(); 
-          } 
+         
     }//GEN-LAST:event_txtNumeroDosKeyTyped
 
     /**
